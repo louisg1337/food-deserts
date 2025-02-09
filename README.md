@@ -22,7 +22,7 @@ The goal of this project is to identify those food deserts, and then recommend o
   - These predicitons can be made using an optimization strategy through adding weights via a heuristic function. We can determine that heuristic function from different factors, such as food access, median income, population density, and transportation availability.
  
 # Visualization
-The food deserts will be visualized using a heatmap of America, showcasing areas that are lacking adequate food resources. The predictions for optimal food pantry locations will then be demonstrated on top of the map.
+The food deserts will be visualized using a heatmap of America, showcasing areas that are lacking adequate food resources. The predictions for optimal food pantry locations will then be demonstrated on top of the map. There will be additional parameters you can play around with and tweak which can alter the locations of the optimal food pantries.
 
 # Testing
-I will train both the clustering and optimization algorithms on 80% of the data and evaluate their performance on the remaining 20%. This approach will help ensure that the models can generalize well and accurately identify patterns in unseen data.
+I will train both the clustering and optimization algorithms on 80% of the data and evaluate their performance on the remaining 20%. This approach will help ensure that the models can generalize well and accurately identify patterns in unseen data. For further quality assurance, I will strategically remove food pantries from my dataset, and see if my prediction algorithm will suggest food pantries in those locations.
