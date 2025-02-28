@@ -12,8 +12,12 @@ The goal of this project is to identify those food deserts, and then recommend o
 # Data Collection
 - To identify food deserts and predict optimal locations for new food pantries we need the following...
   - Grocery and food pantry locations, OpenStreetMap/Web Scraping
+    - OpenStreetMap has a [food security]([url](https://wiki.openstreetmap.org/wiki/Food_security)) section of their wiki with tags dedicated to grocery stores, food pantries.
+    - I can use [Geofabrik]([url](https://www.geofabrik.de/data/download.html)) to download raw OSM data by state and further extract all food related establishments.
   - Census and socioeconomic information, US Census Bureau
-  - Transportation accessibility data, GTFS
+    - There is an interactive table found at [https://data.census.gov/table/](https://data.census.gov/table/) which I can use to find specific socioeconomic information in a given state. It is derived from the 5 year American Community Survey. 
+  - Transportation accessibility data, NTD
+    - The National Transit Database has [data on monthly ridership](https://www.transit.dot.gov/ntd/data-product/monthly-module-adjusted-data-release) on public transit across the country  by zipcode. This will give great insight on how accessible potential food pantry locations would be. 
 
 # Modeling Data Plan
 - Identifying food deserts
