@@ -1,0 +1,232 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0002_ds267_20235_zcta'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2019-2023
+Geographic level: 5-Digit ZIP Code Tabulation Area
+Dataset:          2023 American Community Survey: 5-Year Data [2019-2023, Block Groups & Larger Areas]
+   NHGIS code:    2019_2023_ACS5a
+   NHGIS ID:      ds267
+Breakdown(s):     Geographic Component:
+                     Total area (00)
+Data type(s):     (E) Estimates
+                  (M) Margins of error
+ 
+Tables:
+ 
+1. Educational Attainment for the Population 25 Years and Over
+   Universe:    Population 25 years and over
+   Source code: B15003
+   NHGIS code:  ASP3
+ 
+2. Public Assistance Income or Food Stamps/SNAP in the Past 12 Months for Households
+   Universe:    Households
+   Source code: B19058
+   NHGIS code:  ASRA
+ 
+3. Per Capita Income in the Past 12 Months (in 2023 Inflation-Adjusted Dollars)
+   Universe:    Total population
+   Source code: B19301
+   NHGIS code:  ASRT
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State Postal Abbreviation
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATEA:      State Code
+        COUNTYA:     County Code
+        COUSUBA:     County Subdivision Code
+        PLACEA:      Place/Remainder Code
+        TRACTA:      Census Tract Code
+        BLKGRPA:     Block Group Code
+        CONCITA:     Consolidated City Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIHHTLI:     American Indian/Hawaiian Home Land Trust Land Indicator
+        AITSA:       Tribal Subdivision/Remainder Code
+        ANRCA:       Alaska Native Regional Corporation Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        CSAA:        Combined Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        CNECTA:      New England City and Town Combined Statistical Area
+        NECTADIV:    New England City and Town Area Division
+        UAA:         Urban Area Code
+        CDCURRA:     Congressional District (2023-2025, 118th Congress) Code
+        SLDUA:       State Legislative District (Upper Chamber) Code
+        SLDLA:       State Legislative District (Lower Chamber) Code
+        ZCTA5A:      5-Digit ZIP Code Tabulation Area Code
+        SUBMCDA:     Subminor Civil Division Code
+        SDELMA:      School District (Elementary)/Remainder Code
+        SDSECA:      School District (Secondary)/Remainder Code
+        SDUNIA:      School District (Unified)/Remainder Code
+        PCI:         Principal City Indicator
+        PUMAA:       Public Use Microdata Area Code
+        GEO_ID:      Census Geographic Area Identifier
+        BTTRA:       Tribal Census Tract Code
+        BTBGA:       Tribal Block Group Code
+        TL_GEO_ID:   TIGER/Line Shapefile Geographic Area Identifier
+ 
+Data Type (E):
+    Estimates
+ 
+        NAME_E:      Area Name
+ 
+    Table 1:     Educational Attainment for the Population 25 Years and Over
+    Universe:    Population 25 years and over
+    Source code: B15003
+    NHGIS code:  ASP3
+        ASP3E001:    Total
+        ASP3E002:    No schooling completed
+        ASP3E003:    Nursery school
+        ASP3E004:    Kindergarten
+        ASP3E005:    1st grade
+        ASP3E006:    2nd grade
+        ASP3E007:    3rd grade
+        ASP3E008:    4th grade
+        ASP3E009:    5th grade
+        ASP3E010:    6th grade
+        ASP3E011:    7th grade
+        ASP3E012:    8th grade
+        ASP3E013:    9th grade
+        ASP3E014:    10th grade
+        ASP3E015:    11th grade
+        ASP3E016:    12th grade, no diploma
+        ASP3E017:    Regular high school diploma
+        ASP3E018:    GED or alternative credential
+        ASP3E019:    Some college, less than 1 year
+        ASP3E020:    Some college, 1 or more years, no degree
+        ASP3E021:    Associate's degree
+        ASP3E022:    Bachelor's degree
+        ASP3E023:    Master's degree
+        ASP3E024:    Professional school degree
+        ASP3E025:    Doctorate degree
+ 
+    Table 2:     Public Assistance Income or Food Stamps/SNAP in the Past 12 Months for Households
+    Universe:    Households
+    Source code: B19058
+    NHGIS code:  ASRA
+        ASRAE001:    Total
+        ASRAE002:    With cash public assistance or Food Stamps/SNAP
+        ASRAE003:    No cash public assistance or Food Stamps/SNAP
+ 
+    Table 3:     Per Capita Income in the Past 12 Months (in 2023 Inflation-Adjusted Dollars)
+    Universe:    Total population
+    Source code: B19301
+    NHGIS code:  ASRT
+        ASRTE001:    Per capita income in the past 12 months (in 2023 inflation-adjusted dollars)
+ 
+Data Type (M):
+    Margins of error
+ 
+        NAME_M:      Area Name
+ 
+    Table 1:     Educational Attainment for the Population 25 Years and Over
+    Universe:    Population 25 years and over
+    Source code: B15003
+    NHGIS code:  ASP3
+        ASP3M001:    Total
+        ASP3M002:    No schooling completed
+        ASP3M003:    Nursery school
+        ASP3M004:    Kindergarten
+        ASP3M005:    1st grade
+        ASP3M006:    2nd grade
+        ASP3M007:    3rd grade
+        ASP3M008:    4th grade
+        ASP3M009:    5th grade
+        ASP3M010:    6th grade
+        ASP3M011:    7th grade
+        ASP3M012:    8th grade
+        ASP3M013:    9th grade
+        ASP3M014:    10th grade
+        ASP3M015:    11th grade
+        ASP3M016:    12th grade, no diploma
+        ASP3M017:    Regular high school diploma
+        ASP3M018:    GED or alternative credential
+        ASP3M019:    Some college, less than 1 year
+        ASP3M020:    Some college, 1 or more years, no degree
+        ASP3M021:    Associate's degree
+        ASP3M022:    Bachelor's degree
+        ASP3M023:    Master's degree
+        ASP3M024:    Professional school degree
+        ASP3M025:    Doctorate degree
+ 
+    Table 2:     Public Assistance Income or Food Stamps/SNAP in the Past 12 Months for Households
+    Universe:    Households
+    Source code: B19058
+    NHGIS code:  ASRA
+        ASRAM001:    Total
+        ASRAM002:    With cash public assistance or Food Stamps/SNAP
+        ASRAM003:    No cash public assistance or Food Stamps/SNAP
+ 
+    Table 3:     Per Capita Income in the Past 12 Months (in 2023 Inflation-Adjusted Dollars)
+    Universe:    Total population
+    Source code: B19301
+    NHGIS code:  ASRT
+        ASRTM001:    Per capita income in the past 12 months (in 2023 inflation-adjusted dollars)
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Steven Manson, Jonathan Schroeder, David Van Riper, Katherine Knowles, Tracy Kugler, Finn Roberts, and Steven Ruggles.
+        IPUMS National Historical Geographic Information System: Version 19.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2024. 
+        http://doi.org/10.18128/D050.V19.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
