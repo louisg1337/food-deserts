@@ -6,3 +6,5 @@ shapely
 scikit-learn
 matplotlib
 seaborn
+geopy
+pytest
