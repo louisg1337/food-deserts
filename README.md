@@ -1,12 +1,25 @@
-# Midterm Report Video
-
-[https://youtu.be/OXx2D-yzxbk](https://youtu.be/OXx2D-yzxbk)
+# Final Report Video
 
 # Food Deserts
 
 People throughout America experience food insecurity in numerous ways, one of which being food deserts. These are regions in America where people have limited access to nutritious, affordable food. In these regions, fast food and convenience stores are typically the only food sources available, contributing to poor nutrition and long term health issues. 
 
 The goal of this project is to identify those food deserts, and then recommend optimal locations for new food pantries based on the data given.
+
+# Reproducibility
+
+All work done for this project has been done in Jupyter notebooks found in the `notebooks/` directory. To reproduce any of the results the steps are as follows.
+
+1. Setup local virtual environment.
+2. `pip install -r requirements.txt`
+3. Go through and run the notebooks in sequential order (01, 02, ...).
+
+    _Note:_ A good chunk of the work done in notebooks 01, 02, and 03 involved data processing from Open Street Maps and US Census Data. I have included almost all of the data files, besides the `tl_2020_us_zcta520.shp` ([found here](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html)) and `massachusetts.osm.pbf` ([found here](https://download.geofabrik.de/north-america/us/massachusetts.html)) files used in `01_osm_processing.ipynb` as they are both around 1 GB each. However, the resulting processed CSVs are saved in the repo so notebooks 04 and 05 can run.
+4. Tune parameters in `05_optimize_locations.ipynb`, such as `n_pantries` `radius` `need_scores`, to generate different optimized locations for food pantries.
+
+# Testing
+
+I included a Github Workflow in `.github/workflows/tests.yml` which runs all tests found in `testing/test_optimize.py`. It tests  utility functions used in my optimization notebook, such as distance matrix computation, KMeans based optimization, and greedy selection logic for reproducibility and correctness.
 
 # Data Collection
 
@@ -26,11 +39,11 @@ Now that we had OSM and Census data, it needed to be joined together. Each point
 
 # Data Processing
 
-With the OSM and Census data combined together, data processing could start. The goal is to use KMeans on the data to identify zip codes with similar food options available and socioeconomic standing. From there further analysis can be used to determine in need areas that may benefit from food additional food pantries in the area.
+Now that we have aggregated Open Street Maps and US Census data together, data processing can now start. This is where we can start to understand what regions of Massachusetts are underprivileged and are in need of food pantries.
 
-## Clustering Algorithm and Analysis `notebooks/04_clustering.ipynb`
+## Identify High Risk Regions `notebooks/04_clustering.ipynb`
 
-The specific features we care about are extracted from our dataset, and is then used in the elbow method to determine an optimal value for `n` which happened to be `n=6`. KMeans is then run, and we use PCA on it to visualize it in a 2D space. 
+The goal is to use KMeans on the data to identify zip codes with similar food options available and socioeconomic standing. When KMeans is ran, we use PCA to get a 2D view of the clustering that occurs.
 
 ![kmeans output](visualizations/kmeans_output.png)
 
@@ -51,10 +64,55 @@ Cluster 1 and 3 both stand out to due their high poverty rate, but cluster 1 app
 
 Each red dot represents a zip code that was found within cluster 1. The map is interactive and can be better seen in the video. Spot checking some of these locations, it appears that the clustering algorithm has identified comparatively less well off areas that could benefit from food pantries.
 
-# Future Work
+## Optimize Food Pantry Locations `notebooks/05_optimize_locations.ipynb`
 
-In terms of next steps, I would like to clean up my code and modularize it so that I can gather data on more states and present data on a regional level. After that, I will need to work on the optimization algorithm to determine which a food pantry may be best suited given a range of inputs. I also would like to include another data source or two to help in that determination, such as NTD transportation data to determine accessibility of a given area.
+Now that we have our cluster of interest, we can try to optimally place food pantries among that subset of zip codes. There were two approaches that I decided to take when trying to tackle this optimization problem. 
 
-# Citations
+### KMeans Minize Average Distance
 
-Steven Manson, Jonathan Schroeder, David Van Riper, Katherine Knowles, Tracy Kugler, Finn Roberts, and Steven Ruggles. IPUMS National Historical Geographic Information System: Version 19.0 [dataset]. Minneapolis, MN: IPUMS. 2024. http://doi.org/10.18128/D050.V19.0
+First of all, I thought it would be great to minimize the average distance distance for as many zipcodes as possible. To accomplish this, I utilized KMeans again on cluster 1, where k = number of food pantries, and then returned the centroids of each cluster. This generated the following map...
+
+![Minimize Average Distance](visualizations/kmeans_optimize.png)
+
+### Greedy Maximize Coverage
+
+The next approach I wanted to take was a greedy one in which we maximized the coverage of a food pantry in a given radius, based on some factor. The first factor I tried to maximize was population, which generated the following map...
+
+![Maximize Coverage By Population](visualizations/greedy_pop.png)
+
+After population, I then wanted to try something a bit more nuanced. We have a lot of information about each zip code, such as poverty rate, educational attainment, etc., so I decided to create a `need_score` column based off of that. Each column involved in the need score is normalized, weighted by its importance, and then summed. Here are the weights I used...
+
+```
+# Composite score
+df['need_score'] = (
+    0.3 * df['norm_poverty'] +
+    0.3 * df['norm_snap'] +
+    0.1 * df['norm_edu'] +
+    0.3 * df['norm_income']
+)
+```
+
+
+This then generates the following map...
+
+![Maximize Coverage By Need](visualizations/greedy_need.png)
+
+I then thought it would be interesting to see all of the points displayed on the same map together, which can be seen here...
+
+![All 3 Strategies](visualizations/all_together.gif)
+
+As can be seen, there is actually quite a bit of overlap between some of the strategies, demonstrating a strong consensus of zip codes that are in need. If you look into the specific locations it is recommending as well, it tends to be very underprivileged areas in Massachusetts, demonstrating that food pantries would work great there. 
+
+I then wanted to see some type of numerical data demonstrating how good these pantry locations actually were, so I wrote an evaluation function that does just that. It demonstrates the average / max distance between the food pantries and zip codes in need, and then how much population / need score it covers. The results show that each strategy prioritizes a different trade-off. KMeans offers spatial balance, population maximizes reach, and need score emphasizes equitable targeting of underserved communities.
+
+| Strategy             | Avg Distance (mi) | Max Distance (mi) | Total Weight Covered | % Weight Covered |
+|----------------------|-------------------|--------------------|-----------------------|------------------|
+| KMeans               | 12.09             | 34.32              | 701,050.00            | 55.47%           |
+| Greedy (Population)  | 13.77             | 47.75              | 945,002.00            | 74.77%           |
+| Greedy (Need)        | 10.46             | 47.75              | 18.31                 | 66.18%           |
+
+# Conclusion
+
+Based off of the maps and table above, it appears that I was able to adequately identify potential locations for food pantries within Massachusetts. The food pantry locations appear to be quite equitable, and reasonably placed to maximize the amount of people helped. 
+
+
